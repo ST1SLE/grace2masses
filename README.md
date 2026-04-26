@@ -19,6 +19,15 @@ Install:
 
 A local clone of the plugin repo lives at `../grace-marketplace/` (sibling of `kb/`). For the full skill inventory, artifact scaffold, install variants, and a note on where the plugin's scope exceeds the KB author's explicit audit, see [`09-tooling/claude-code-grace-plugin.md`](09-tooling/claude-code-grace-plugin.md).
 
+### Brownfield supplement skills
+
+Two custom skills ship with this repo under [`.claude/skills/`](.claude/skills/), filling the HARD gaps the plugin does not cover for adopting GRACE on an existing Python codebase:
+
+- **`grace-legacy-contracts`** — synthesizes PURPOSE / INPUTS / OUTPUTS / KEYWORDS / LINKS contract blocks above each `def` with wenyan compression, English-only PURPOSE enforcement, and the flush-above-def placement rule (Bucket A in the audit — five MISSING gaps in `kb/03-contracts/` and `kb/04-markup-system/`).
+- **`grace-ldd-retrofit`** — injects `[Module][function][BLOCK]` correlation tokens onto existing `logger.*` calls, adds belief-state lines at critical branches, and marks load-bearing log lines with `@forced-context` (Bucket B in the audit — four MISSING gaps in `kb/05-logging-ldd/`).
+
+See [`_plugin-audit.md`](_plugin-audit.md) for the gap-analysis decision record, and [`08-workflow-and-phases/brownfield-adoption.md`](08-workflow-and-phases/brownfield-adoption.md) for the seven-checkpoint adoption playbook these two skills sit inside (CP3/CP4 use `grace-legacy-contracts`; CP5 uses `grace-ldd-retrofit`).
+
 ## How this KB is organized
 
 Each chapter has its own directory. Every file follows the `What / Why / How / Evidence / See also` skeleton, with every factual claim cited to a source post or file and labeled by claim type (`[empirical]`, `[research-backed]`, `[author-claim]`, `[vendor-doc]`).
